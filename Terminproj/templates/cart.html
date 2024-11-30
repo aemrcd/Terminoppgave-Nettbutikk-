@@ -1,0 +1,54 @@
+<!-- cart.html -->
+{% extends 'base.html' %}
+
+{% block title %}Min Handlekurv{% endblock %}
+
+{% block content %}
+    <div class="cart-container">
+        <!-- Left Column: Product Details -->
+        <div class="cart-products">
+            {% for item in cart %}
+                <div class="cart-item">
+                    <!-- Product Image -->
+                    <img src="{{ item.image_url }}" alt="{{ item.name }}">
+
+                    <!-- Product Details -->
+                    <div class="cart-item-details">
+                        <div class="cart-item-name">{{ item.name }}</div>
+                        <div class="cart-item-quantity">
+                            <!-- Quantity controls -->
+                            <form action="{{ url_for('update_quantity', uuid=item.uuid) }}" method="POST">
+                              <button type="submit" name="action" value="decrease">-</button>
+                              <input type="number" name="quantity" value="{{ item.quantity or 1 }}" min="1" readonly>
+                              <button type="submit" name="action" value="increase">+</button>
+                          </form>
+                        </div>
+                    </div>
+
+                    <!-- Delete Button -->
+                    <div class="cart-item-delete">
+                        <form action="{{ url_for('remove_from_cart', uuid=item.uuid) }}" method="POST">
+                            <button type="submit">Slett</button>
+                        </form>
+                    </div>
+
+                    <!-- Product Price -->
+                    <div class="cart-item-price">Kr {{ item.price }}</div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Right Column: Summary and Payment -->
+        <div class="cart-summary">
+            <h2>Bestillingsoversikt</h2>
+            <div class="cart-total">
+                <p>Totalpris: Kr {{ total_price }}</p>
+            </div>
+            
+            <!-- Payment Button -->
+            <form action="{{ url_for('checkout') }}" method="POST">
+                <button type="submit" class="payment-btn">Gå til betaling</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

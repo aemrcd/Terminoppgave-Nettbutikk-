@@ -1,0 +1,29 @@
+<!-- base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Shokjøp{% endblock %}</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+    <!-- Include the Navbar -->
+    {% include 'navbar.html' %}
+
+    <!-- Main Content Block -->
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        Shokjøp © <a target="_blank" href="https://github.com/freyzsaycon/Shokjop.git">
+            <img src="/static/img/githublogo.png" alt="github logo">
+        </a>
+    </footer>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
