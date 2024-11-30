@@ -29,8 +29,8 @@ def Cart():
 
 @app.route('/checkout', methods=['POST'])
 def checkout():
-    # Handle the payment process here (e.g., integrate with Stripe, PayPal, etc.)
-    return render_template('checkout.html')  # Redirect to a checkout page or continue processing
+    # Handle the payment process here 
+    return render_template('mineordre.html')  # Redirect to a checkout page or continue processing
 
 # Add product to the cart
 @app.route('/add_to_cart', methods=['POST'])
@@ -44,7 +44,8 @@ def add_to_cart():
     product_name = request.form.get('product_name')
     product_price = request.form.get('product_price')
     quantity = int(request.form.get('quantity', 1))  # Get quantity from the form (default to 1)
-    
+    image = request.form.get('product_image')
+
     # Validate inputs
     if not all([product_id, product_name, product_price]):
         return redirect(url_for('Home'))  # Redirect to home with an error message
@@ -64,7 +65,8 @@ def add_to_cart():
             'id': product_id,
             'name': product_name,
             'price': product_price,
-            'quantity': quantity  # Set the specified quantity
+            'quantity': quantity,  # Set the specified quantity
+            'image': image
         })
 
     session.modified = True  # Ensure Flask saves the session changes

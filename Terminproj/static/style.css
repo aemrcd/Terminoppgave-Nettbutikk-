@@ -370,33 +370,71 @@ text-decoration: none;
     border-bottom: 1px solid #ddd;
 }
 
+/* Image styling */
 .cart-item img {
-    width: 100px;
+    width: 130px;
     height: 100px;
-    object-fit: cover;
+    object-fit: fill;
     border-radius: 8px;
+    border: solid 1px;
 }
 
+/* Product details container */
 .cart-item-details {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    padding-left: 10%;
 }
 
+/* Product name styling */
 .cart-item-name {
     font-size: 1.2rem;
     font-weight: bold;
 }
 
+/* Quantity controls */
 .cart-item-quantity {
     display: flex;
-    align-items: center;
+    justify-content: flex-start;
     margin-top: 0.5rem;
+    align-items: center;
 }
 
 .cart-item-quantity input {
-    width: 50px;
+    width: 30px;
     text-align: center;
+    padding-top: 3.5%;
+}
+
+.cart-item-quantity button {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%; /* Circular buttons */
+    border: 1.5px solid #000000;
+    background-color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
     margin: 0 0.5rem;
+}
+
+.cart-item-quantity button:hover {
+    background-color: #f0f0f0;
+}
+
+/* Product price styling - move it under name and quantity */
+.cart-item-price {
+    font-size: 1.3rem;
+    font-weight: bold; 
+    margin-top: 0.5rem; 
+    color: #333; 
+    text-align: end;
+}
+
+/* Delete button */
+.cart-item-delete {
+    text-align: center;
 }
 
 .cart-item-delete button {
@@ -416,54 +454,91 @@ text-decoration: none;
 /* Right column: summary and payment */
 .cart-summary {
     padding: 2rem;
-    background-color: #fff;
+    background-color: white;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
     text-align: center;
 }
-
-.cart-summary h2 {
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-}
-
 .cart-total {
     font-size: 1.3rem;
+    font-weight: bold; 
     margin: 1.5rem 0;
 }
 
-.cart-summary button {
-    background-color: #28a745;
-    color: white;
-    border: none;
-    padding: 0.8rem 1.5rem;
+/* Payment button with CTA hover effect */
+.payment-btn {
+    padding: 1rem 2.5rem;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease, border 0.3s ease; 
+    border: 2px solid black; 
+    display: flex;
+    margin-left: 5%;
 }
 
-.cart-summary button:hover {
-    background-color: #218838;
-}
-
-/* Extra style for the "Go to Payment" button */
-.cart-summary .payment-btn {
-    margin-top: 2rem;
-    background-color: #007bff;
-    color: white;
-    padding: 1rem 2rem;
-    border-radius: 5px;
+.cta {
+    background: none;
     cursor: pointer;
-    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.cart-summary .payment-btn:hover {
-    background-color: #0056b3;
+.cta span {
+    letter-spacing: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
 }
 
+.cta svg {
+    transform: translateX(-8px);
+    transition: all 0.3s ease;
+    margin-left: 10px;
+}
 
+.cta:hover svg {
+    transform: translateX(0);
+}
 
+.cta:active svg {
+    transform: scale(0.9);
+}
 
+.hover-underline-animation {
+    position: relative;
+    color: black;
+    padding-bottom: 5px;
+    
+}
+
+.hover-underline-animation:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #000000;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+
+.cta:hover .hover-underline-animation:after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+/* Payment button hover effect */
+.payment-btn:hover {
+    background-color: #1eb300;
+    border: none; 
+}
+
+.payment-btn:active {
+    background-color: #003f87;
+}
 
 
 
@@ -643,6 +718,7 @@ margin-left: 49%;
 }
 
 /* Product Pages end */
+
 
 /* My orders start */
 
