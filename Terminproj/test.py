@@ -133,6 +133,10 @@ def ps4kontroller():
 def gamingkeyboard():
     return render_template('60keyboard.html')
 
+@app.route('/purchase_history')
+def purchase_history():
+    return render_template('mineordre.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)

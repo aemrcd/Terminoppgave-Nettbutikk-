@@ -374,9 +374,9 @@ text-decoration: none;
 .cart-item img {
     width: 130px;
     height: 100px;
-    object-fit: fill;
+    object-fit: cover;
     border-radius: 8px;
-    border: solid 1px;
+    border: 1px solid #ccc;
 }
 
 /* Product details container */
@@ -404,35 +404,34 @@ text-decoration: none;
 .cart-item-quantity input {
     width: 30px;
     text-align: center;
-    padding-top: 3.5%;
+    padding: 0.5rem;
+    margin: 0 0.5rem;
 }
 
 .cart-item-quantity button {
     width: 30px;
     height: 30px;
-    border-radius: 50%; /* Circular buttons */
+    border-radius: 50%; 
     border: 1.5px solid #000000;
     background-color: #fff;
     font-size: 1.5rem;
     cursor: pointer;
     transition: background-color 0.3s;
-    margin: 0 0.5rem;
 }
 
 .cart-item-quantity button:hover {
     background-color: #f0f0f0;
 }
 
-/* Product price styling - move it under name and quantity */
+
 .cart-item-price {
     font-size: 1.3rem;
-    font-weight: bold; 
-    margin-top: 0.5rem; 
-    color: #333; 
+    font-weight: bold;
+    color: #333;
     text-align: end;
 }
 
-/* Delete button */
+
 .cart-item-delete {
     text-align: center;
 }
@@ -448,7 +447,7 @@ text-decoration: none;
 }
 
 .cart-item-delete button:hover {
-    background-color: #1AFF00;
+    background-color: #1aff00;
 }
 
 /* Right column: summary and payment */
@@ -459,89 +458,55 @@ text-decoration: none;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
     text-align: center;
 }
+
 .cart-total {
     font-size: 1.3rem;
-    font-weight: bold; 
+    font-weight: bold;
     margin: 1.5rem 0;
 }
 
-/* Payment button with CTA hover effect */
-.payment-btn {
+
+button.cta,
+button.history-btn {
+    width: 100%; 
     padding: 1rem 2.5rem;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease, border 0.3s ease; 
-    border: 2px solid black; 
+    transition: background-color 0.3s ease, border 0.3s ease;
+    border: 2px solid black;
     display: flex;
-    margin-left: 5%;
-    
-}
-
-.cta {
-    background: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    margin: 1rem 0;
+    background-color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+    box-sizing: border-box; 
+    color: black; 
 }
 
-.cta span {
-    letter-spacing: 4px;
+
+.history-btn {
+    background-color: #4a90e2;  
+    color: white; 
+    padding: 1rem 2rem;
+    font-size: 16px;  
+}
+
+.history-btn:hover {
+    background-color: #003f87;  
+    border: none;
+    color: white; 
+}
+
+
+button.cta span,
+button.history-btn span {
+    letter-spacing: 2px;  
     font-size: 14px;
     font-weight: bold;
-    text-transform: uppercase;
+    white-space: nowrap;  
 }
-
-.cta svg {
-    transform: translateX(-8px);
-    transition: all 0.3s ease;
-    margin-left: 10px;
-}
-
-.cta:hover svg {
-    transform: translateX(0);
-}
-
-.cta:active svg {
-    transform: scale(0.9);
-}
-
-.hover-underline-animation {
-    position: relative;
-    color: black;
-    padding-bottom: 5px;
-    
-}
-
-.hover-underline-animation:after {
-    content: "";
-    position: absolute;
-    width: 100%;
-    transform: scaleX(0);
-    height: 2px;
-    bottom: 0;
-    left: 0;
-    background-color: #000000;
-    transform-origin: bottom right;
-    transition: transform 0.25s ease-out;
-}
-
-.cta:hover .hover-underline-animation:after {
-    transform: scaleX(1);
-    transform-origin: bottom left;
-}
-
-/* Payment button hover effect */
-.payment-btn:hover {
-    background-color: #1eb300;
-    border: none; 
-}
-
-.payment-btn:active {
-    background-color: #003f87;
-}
-
-
 
 
 
@@ -634,8 +599,8 @@ justify-content: center;
     color: #000000;
     gap: 200px;
     margin-top: 10%;
-font-weight: bold;
-justify-content: center;
+    font-weight: bold;
+    justify-content: center;
 }
 
 #paynow {
@@ -790,7 +755,6 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center; 
-    position: fixed; 
     bottom: 0; 
     width: 100%; 
     background: rgba(0, 0, 0, 0.767);

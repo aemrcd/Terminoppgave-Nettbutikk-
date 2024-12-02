@@ -1,59 +1,81 @@
-<!-- cart.html -->
 {% extends 'base.html' %}
 
 {% block title %}Min Handlekurv{% endblock %}
 
 {% block content %}
-    <div class="cart-container">
-        <!-- Left Column: Product Details -->
-        <div class="cart-products">
-            {% for item in cart %}
-                <div class="cart-item">
-                    <!-- Product Image -->
-                     
-                    <img src="{{ item.image}}"  width="100">
+<div class="cart-container">
+    <!-- Left Column: Product Details -->
+    <div class="cart-products">
+        {% for item in cart %}
+        <div class="cart-item">
+            <!-- Product Image -->
+            <img src="{{ item.image }}" width="100">
 
-                    <!-- Product Details -->
-                    <div class="cart-item-details">
-                        <div class="cart-item-name">{{ item.name }}</div>
-                        <div class="cart-item-quantity">
-                            <!-- Quantity controls -->
-                            <form action="{{ url_for('update_quantity', uuid=item.uuid) }}" method="POST">
-                              <button type="submit" name="action" value="decrease">-</button>
-                              <input type="number" name="quantity" value="{{ item.quantity or 1 }}" min="1" readonly>
-                              <button type="submit" name="action" value="increase">+</button>
-                          </form>
-                        </div>
-                    </div>
-
-                    <!-- Delete Button -->
-                    <div class="cart-item-delete">
-                        <form action="{{ url_for('remove_from_cart', uuid=item.uuid) }}" method="POST">
-                            <button type="submit">Slett</button>
-                        </form>
-                    </div>
-
-                    <!-- Product Price -->
-                    <div class="cart-item-price">Kr {{ item.price }}</div>
+            <!-- Product Details -->
+            <div class="cart-item-details">
+                <div class="cart-item-name">{{ item.name }}</div>
+                <div class="cart-item-quantity">
+                    <!-- Quantity controls -->
+                    <form action="{{ url_for('update_quantity', uuid=item.uuid) }}" method="POST">
+                        <button type="submit" name="action" value="decrease">-</button>
+                        <input type="number" name="quantity" value="{{ item.quantity or 1 }}" min="1" readonly>
+                        <button type="submit" name="action" value="increase">+</button>
+                    </form>
                 </div>
-            {% endfor %}
+            </div>
+
+            <!-- Delete Button -->
+            <div class="cart-item-delete">
+                <form action="{{ url_for('remove_from_cart', uuid=item.uuid) }}" method="POST">
+                    <button type="submit">Remove</button>
+                </form>
+            </div>
+
+            <!-- Product Price -->
+            <div class="cart-item-price">Kr {{ item.price }}</div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Right Column: Summary and Payment -->
+    <div class="cart-summary">
+        <h2>Order Overview</h2>
+        <div class="cart-total">
+            <p>Total: Kr {{ total_price }}</p>
         </div>
 
-        <!-- Right Column: Summary and Payment -->
-        <div class="cart-summary">
-            <h2>Bestillingsoversikt</h2>
-            <div class="cart-total">
-                <p>Totalpris: Kr {{ total_price }}</p>
+      <!-- Payment Button -->
+<form action="{{ url_for('checkout') }}" method="POST">
+    <button type="submit" class="history-btn cta">
+        <span class="hover-underline-animation">Pay Now!</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="10" viewBox="0 0 46 16">
+            <path d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z" transform="translate(30)"></path>
+        </svg>
+    </button>
+</form>
+
+<!-- Purchase History Button -->
+<form action="{{ url_for('purchase_history') }}" method="GET">
+    <button type="submit" class="history-btn cta">
+        <span class="hover-underline-animation">Purchase History</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="10" viewBox="0 0 46 16">
+            <path d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z" transform="translate(30)"></path>
+        </svg>
+    </button>
+</form>
+
+
+        <!-- Payment Methods Display -->
+        <div class="payment-methods">
+            <h3>Available Payment Methods:</h3>
+            <div>
+                <img src="/static/img/visa.png" alt="Visa">
+                <img src="/static/img/mastercard.png" alt="MasterCard">
+                <img src="/static/img/paypal.png" alt="PayPal">
             </div>
-            
-            <!-- Payment Button -->
-            <form action="{{ url_for('checkout') }}" method="POST">
-                <button type="submit" class="payment-btn cta">
-                    <span class="hover-underline-animation">Go to Payment</span>
-                    <svg id="arrow-horizontal" xmlns="http://www.w3.org/2000/svg" width="30" height="10" viewBox="0 0 46 16"><path id="Path_10" data-name="Path 10" d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z" transform="translate(30)"></path></svg>
-                </button>
-            </form>
         </div>
-    </div>
-    <script src="/Terminproj/static/script.js"></script>
+<script src="/static/script.js"></script>
+
+
 {% endblock %}
+
