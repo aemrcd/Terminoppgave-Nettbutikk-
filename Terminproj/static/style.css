@@ -474,6 +474,7 @@ text-decoration: none;
     border: 2px solid black; 
     display: flex;
     margin-left: 5%;
+    
 }
 
 .cta {
@@ -788,21 +789,25 @@ color: #1AFF00;
 footer {
     display: flex;
     justify-content: center;
-    text-align: center;
-    padding: 40px;
-    bottom: 0;
-    background: black;
+    align-items: center; 
+    position: fixed; 
+    bottom: 0; 
+    width: 100%; 
+    background: rgba(0, 0, 0, 0.767);
     color: white;
+    padding: 20px 0; 
     font-size: 30px;
-    font-family: Segoe UI;
+    font-family: 'Segoe UI', sans-serif;
     font-weight: lighter;
-    margin-top: 10%;
-    gap: 5%;
+    gap: 3%;
 }
 
+
 footer img {
-width: 2%;
-position: absolute;
+    width: auto;
+    height: 40px;
+    
+
 }
 
 /* Media queries start */

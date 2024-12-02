@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hvit Razer Keyboard</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 
 <!-- Navbar start -->
@@ -12,31 +12,11 @@
 
     <div class="loading" id="loading">
         <div class="loadinggear" id="loadinggear">
-        <img class src="img/gears_spinner.svg" alt="gear spinner">
+        <img class src="/static/img/gears_spinner.svg" alt="gear spinner">
         </div>
            </div>
 
-    <div class="navbar">
-        <a id="navtext" href="index.html"><-</a>
-   <a id="navtext" href="index.html">Hjem</a>
-   <div class="searchfull">
-    <button onclick="showBar()" class="search" type="submit">
-        <img id="icons" src="img/search.png" alt="search icon">
-      </button>
-      <input class="searchbutton"
-      placeholder="Søk..."/>
-    </div>
-   <a href="index.html"><img id="logo" src="img/logofornettside.svg" alt="logo"></a>
-   <div class="menu">
-   <button class="dropmenu"><img id="icons" src="img/menu.png" alt="menu"></button>
-   <div class="dropmenubuttons">
-   <a href="handlekurv.html">Min handlekurv</a>
-   <a href="minkonto.html">Min konto</a>
-   <a href="mineordre.html">Mine bestillinger</a>
-   </div>
-   </div>
-   <a id="navtext" href="kontakt.html">Kontakt</a>
-    </div>
+           {% include 'navbar.html' %}
 <!-- Navbar end -->
 
 <!-- Titles start -->
@@ -53,7 +33,7 @@ Hvit Razer Keyboard
 
 <!-- Product information start -->
 <div class="productimageandinfo">
-<img src="img/razerkeyboard.jpg" alt="razer white 60 keyboard">
+<img src="/static/img/razerkeyboard.jpg" alt="razer white 60 keyboard">
 <p>Med det stilige gamingtastaturet Razer Huntsman Mini kan du være rask, presis og stilig mens du spiller. Det har lineære optiske røde brytere, integrert minne og 5 tilpassbare profiler, samt justerbar RGB-belysning.
     </p>
 </div>    
@@ -72,7 +52,7 @@ Hvit Razer Keyboard
 
 
 <footer>
-    Shokjøp © <a target="_blank" href="https://github.com/freyzsaycon/Shokjop.git"><img src="img/githublogo.png" alt="github logo"></a>
+    Shokjøp © <a target="_blank" href="https://github.com/freyzsaycon/Shokjop.git"><img src="/static/img/githublogo.png" alt="github logo"></a>
 </footer>
 
 <script src="script.js"></script>

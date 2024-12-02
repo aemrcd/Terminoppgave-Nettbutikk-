@@ -4,11 +4,6 @@ from flask import Flask, render_template, request, redirect, url_for, session
 app = Flask(__name__)
 app.secret_key = 'Frendon&Angelito'
 
-# Helper function to initialize cart
-def initialize_cart():
-    if 'cart' not in session:
-        session['cart'] = []
-
 # Hjemmeside
 @app.route('/')
 def Home():
@@ -32,12 +27,19 @@ def checkout():
     # Handle the payment process here 
     return render_template('mineordre.html')  # Redirect to a checkout page or continue processing
 
+# Helper function to initialize cart
+def initialize_cart():
+    if 'cart' not in session:
+        session['cart'] = []
+
+
 # Add product to the cart
 @app.route('/add_to_cart', methods=['POST'])
 def add_to_cart():
     # Initialize the cart if not already initialized
     if 'cart' not in session:
         session['cart'] = []
+    
     
     # Retrieve product data from the form
     product_id = request.form.get('product_id')
@@ -65,7 +67,7 @@ def add_to_cart():
             'id': product_id,
             'name': product_name,
             'price': product_price,
-            'quantity': quantity,  # Set the specified quantity
+            'quantity': quantity,  
             'image': image
         })
 
@@ -110,6 +112,26 @@ def remove_from_cart(uuid):
 def Orders():
     return render_template('mineordre.html')
 
+# MORE INFORMATION BUTTON LINKS
+
+@app.route('/xboxkontroller')
+def xboxkontroller():
+    return render_template('xboxkontroller.html')
+@app.route('/tklkeyboard')
+def tklkeyboard():
+    return render_template('tklkeyboard.html')
+@app.route('/razerkeyboard')
+def razerkeyboard():
+    return render_template('razerkeyboard.html')
+@app.route('/ps5kontroller')
+def ps5kontroller():
+    return render_template('ps5kontroller.html')
+@app.route('/ps4kontroller')
+def ps4kontroller():
+    return render_template('ps4kontroller.html')
+@app.route('/60keyboard')
+def gamingkeyboard():
+    return render_template('60keyboard.html')
 
 
 if __name__ == '__main__':
