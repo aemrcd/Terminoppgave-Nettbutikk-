@@ -456,13 +456,13 @@ text-decoration: none;
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-    text-align: center;
+    text-align: left;
 }
 
 .cart-total {
     font-size: 1.3rem;
-    font-weight: bold;
-    margin: 1.5rem 0;
+    font-weight: 400;
+    margin: 2rem 0;
 }
 
 
@@ -475,7 +475,7 @@ button.history-btn {
     transition: background-color 0.3s ease, border 0.3s ease;
     border: 2px solid black;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     margin: 1rem 0;
     background-color: white;
@@ -483,6 +483,7 @@ button.history-btn {
     font-weight: bold;
     box-sizing: border-box; 
     color: black; 
+    
 }
 
 
@@ -494,7 +495,7 @@ button.history-btn {
 }
 
 .history-btn:hover {
-    background-color: #003f87;  
+    background-color: #3292ff;  
     border: none;
     color: white; 
 }

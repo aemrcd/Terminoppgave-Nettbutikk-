@@ -1,10 +1,11 @@
-import uuid  # Import for generating unique IDs
+import uuid  
 from flask import Flask, render_template, request, redirect, url_for, session
+from database import mydb
 
 app = Flask(__name__)
 app.secret_key = 'Frendon&Angelito'
 
-# Hjemmeside
+# Home
 @app.route('/')
 def Home():
     return render_template('index.html')
@@ -25,7 +26,7 @@ def Cart():
 @app.route('/checkout', methods=['POST'])
 def checkout():
     # Handle the payment process here 
-    return render_template('mineordre.html')  # Redirect to a checkout page or continue processing
+    return render_template('mineordre.html') 
 
 # Helper function to initialize cart
 def initialize_cart():
@@ -45,25 +46,25 @@ def add_to_cart():
     product_id = request.form.get('product_id')
     product_name = request.form.get('product_name')
     product_price = request.form.get('product_price')
-    quantity = int(request.form.get('quantity', 1))  # Get quantity from the form (default to 1)
+    quantity = int(request.form.get('quantity', 1))  
     image = request.form.get('product_image')
 
     # Validate inputs
     if not all([product_id, product_name, product_price]):
-        return redirect(url_for('Home'))  # Redirect to home with an error message
+        return redirect(url_for('Home'))  
     
     # Check if the product already exists in the cart
     item_exists = False
     for item in session['cart']:
-        if item['id'] == product_id:  # Check if the product is already in the cart
-            item['quantity'] += quantity  # Increase the quantity by the amount specified
+        if item['id'] == product_id:  
+            item['quantity'] += quantity  
             item_exists = True
             break
 
     # If item doesn't exist in the cart, add it as a new item
     if not item_exists:
         session['cart'].append({
-            'uuid': str(uuid.uuid4()),  # Generate a unique ID
+            'uuid': str(uuid.uuid4()),  
             'id': product_id,
             'name': product_name,
             'price': product_price,
@@ -71,7 +72,7 @@ def add_to_cart():
             'image': image
         })
 
-    session.modified = True  # Ensure Flask saves the session changes
+    session.modified = True  
 
     return redirect(url_for('Cart'))
 

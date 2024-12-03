@@ -7,4 +7,5 @@ mydb = mysql.connector.connect(
   database="loginsystem"
 )
 
-print("YOU ARE IDIOT")
+print("YOU ARE IDIOT AHAHHAHAAHAHAHAHAH")
+
