@@ -3,46 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mine bestillinger</title>
+    <title>My orders</title>
     <link rel="stylesheet" href="/static/style.css">
 </head>
 
 <!-- Navbar start -->
 <body>
-
     <div class="loading" id="loading">
         <div class="loadinggear" id="loadinggear">
         <img class src="/static/img/gears_spinner.svg" alt="gear spinner">
         </div>
            </div>
 
-    <div class="navbar">
-        <a id="navtext" href="/"><-</a>
-   <a id="navtext" href="/">Hjem</a>
-   <div class="searchfull">
-    <button onclick="showBar()" class="search" type="submit">
-        <img id="icons" src="/static/img/search.png" alt="search icon">
-      </button>
-      <input class="searchbutton"
-      placeholder="Søk..."/>
-    </div>
-   <a href="/"><img id="logo" src="/static/img/logofornettside.svg" alt="logo"></a>
-   <div class="menu">
-   <button class="dropmenu"><img id="icons" src="/static/img/menu.png" alt="menu"></button>
-   <div class="dropmenubuttons">
-   <a href="/Cart">Min handlekurv</a>
-   <a href="minkonto.html">Min konto</a>
-   <a href="/Orders">Mine bestillinger</a>
-   </div>
-   </div>
-   <a id="navtext" href="kontakt.html">Kontakt</a>
-    </div>
+           {% include 'navbar.html' %}
+
 <!-- Navbar end -->
 
 <!-- Titles start -->
 
 <div class="pagetitle">
-Mine bestillinger
+My Orders
 </div>
 
 <div class="title">
@@ -50,7 +30,8 @@ Mine bestillinger
     </div>
     
 <!-- Titles end -->
-
+ 
+</div>
 
 <body>
 

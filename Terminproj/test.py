@@ -1,12 +1,15 @@
 import uuid  
 from flask import Flask, render_template, request, redirect, url_for, session
-from database import mydb
+# from database import mydb
+from datetime import datetime
 
 app = Flask(__name__)
 app.secret_key = 'Frendon&Angelito'
 
 # Home
+
 @app.route('/')
+
 def Home():
     return render_template('index.html')
 
@@ -23,10 +26,6 @@ def Cart():
     # Render the cart page with the total price
     return render_template('cart.html', cart=cart, total_price=total_price)
 
-@app.route('/checkout', methods=['POST'])
-def checkout():
-    # Handle the payment process here 
-    return render_template('mineordre.html') 
 
 # Helper function to initialize cart
 def initialize_cart():
@@ -108,10 +107,15 @@ def remove_from_cart(uuid):
     session.modified = True  # Mark session as modified
     return redirect(url_for('Cart'))
 
-# Order Section
-@app.route('/Orders')
-def Orders():
+@app.route('/checkout', methods=['POST'])
+def checkout():
+    return redirect(url_for('purchase_history'))  # Redirect to purchase history
+
+
+@app.route('/purchase_history')
+def purchase_history():
     return render_template('mineordre.html')
+
 
 # MORE INFORMATION BUTTON LINKS
 
@@ -133,10 +137,6 @@ def ps4kontroller():
 @app.route('/60keyboard')
 def gamingkeyboard():
     return render_template('60keyboard.html')
-
-@app.route('/purchase_history')
-def purchase_history():
-    return render_template('mineordre.html')
 
 
 if __name__ == '__main__':
