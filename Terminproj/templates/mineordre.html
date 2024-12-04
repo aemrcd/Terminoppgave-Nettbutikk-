@@ -3,44 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My orders</title>
     <link rel="stylesheet" href="/static/style.css">
+    <title>Purchase History</title>
 </head>
-
-<!-- Navbar start -->
 <body>
-    <div class="loading" id="loading">
-        <div class="loadinggear" id="loadinggear">
-        <img class src="/static/img/gears_spinner.svg" alt="gear spinner">
-        </div>
-           </div>
+    {% include 'navbar.html' %}
+    <div class="container">
+        <h1 class="text-center my-4">Purchase History</h1>
 
-           {% include 'navbar.html' %}
-
-<!-- Navbar end -->
-
-<!-- Titles start -->
-
-<div class="pagetitle">
-My Orders
-</div>
-
-<div class="title">
-    Order History
+        {% if purchases %}
+            <div class="row">
+                {% for purchase in purchases %}
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Date: {{ purchase['date'] }}</h5>
+                                <ul class="list-group">
+                                    {% for item in purchase['items'] %}
+                                        <li class="list-group-item">
+                                            <div class="d-flex">
+                                                <div class="mr-3">
+                                                    <img src="{{ item['image'] }}" alt="{{ item['name'] }}" class="img-fluid" style="width: 100px; height: 100px;">
+                                                </div>
+                                                <div>
+                                                    <h6 class="card-subtitle mb-2">{{ item['name'] }}</h6>
+                                                    <p class="card-text">Price: kr {{ item['price'] }}</p>
+                                                    <p class="card-text">Quantity: {{ item['quantity'] }}</p>
+                                                    <p class="card-text"><strong>Total: kr {{ item['price']|float * item['quantity']|float }}</strong></p>
+                                                </div>
+                                              
+                                    
+                                            </div>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-center">You have no purchase history yet.</p>
+        {% endif %}
     </div>
-    
-<!-- Titles end -->
- 
-</div>
-
-<body>
-
-
+</body>
 
 <footer>
     Shokjøp © <a target="_blank" href="https://github.com/freyzsaycon/Shokjop.git"><img src="/static/img/githublogo.png" alt="github logo"></a>
 </footer>
 
-<script src="/static/script.js"></script>
-</body>
 </html>

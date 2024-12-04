@@ -1,5 +1,5 @@
 import uuid  
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, get_flashed_messages,flash
 # from database import mydb
 from datetime import datetime
 
@@ -31,6 +31,8 @@ def Cart():
 def initialize_cart():
     if 'cart' not in session:
         session['cart'] = []
+    if 'purchase_history' not in session:
+        session['purchase_history'] = []  
 
 
 # Add product to the cart
@@ -78,8 +80,6 @@ def add_to_cart():
 @app.route('/update_quantity/<uuid>', methods=['POST'])
 def update_quantity(uuid):
     cart_items = session.get('cart', [])
-
-    # Ensure UUID comparison is consistent
     for item in cart_items:
         if str(item['uuid']) == uuid:  # Convert to string for comparison
             action = request.form.get('action')
@@ -104,17 +104,40 @@ def remove_from_cart(uuid):
     initialize_cart()
     # Remove only the item with the matching UUID
     session['cart'] = [item for item in session['cart'] if item['uuid'] != uuid]
-    session.modified = True  # Mark session as modified
+    session.modified = True  
     return redirect(url_for('Cart'))
 
 @app.route('/checkout', methods=['POST'])
 def checkout():
-    return redirect(url_for('purchase_history'))  # Redirect to purchase history
+    initialize_cart()  
+    if session['cart']:
+        # Create the purchase entry
+        purchase_entry = {
+            'date': datetime.now().strftime("%Y-%m-%d"),
+            'items': session['cart'].copy() 
+        }
+        
+        # Append to purchase history in session
+        session['purchase_history'].append(purchase_entry)
+        
+        flash('Purchase successful! Thank you for your order.', 'success')
+        
+        # Clear the cart after purchase
+        session['cart'] = []
+        session.modified = True 
 
+    return redirect(url_for('Cart'))
 
 @app.route('/purchase_history')
 def purchase_history():
-    return render_template('mineordre.html')
+    initialize_cart()  
+    purchases = session.get('purchase_history', [])
+    
+    limit = 5
+    limited_purchases = purchases[-limit:]  
+    
+    return render_template('mineordre.html', purchases=limited_purchases)
+
 
 
 # MORE INFORMATION BUTTON LINKS
