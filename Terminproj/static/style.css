@@ -704,51 +704,93 @@ font-weight: bold;
 text-decoration: underline;
 }
 
-/* My orders end */
-.container {
+/* Purchase History Page */
+.purchase-history-container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
+    font-family: 'Arial', sans-serif;
+    color: #333;
 }
 
-.card {
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-}
-
-.card-body {
-    padding: 15px;
-}
-
-.card-title {
-    font-size: 1.25rem;
-    font-weight: bold;
-}
-
-.card-text {
-    margin: 5px 0;
-}
-
-.card-subtitle {
-    font-size: 1rem;
-    font-weight: 600;
-}
-
-.list-group-item {
+.purchase-history-table {
     display: flex;
-    align-items: center;
-    padding: 15px;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
-.list-group-item img {
+.purchase-item {
+    flex: 1 1 calc(50% - 20px);
+    background-color: #f9f9f9;
     border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    overflow: hidden;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.purchase-item-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.purchase-item-date {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.purchase-item-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.purchase-item-list-item {
+    display: flex;
+    padding: 15px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.purchase-item-details {
+    display: flex;
+    width: 100%;
+}
+
+.purchase-item-image {
     margin-right: 15px;
 }
 
-.text-center {
-    text-align: center;
+.purchase-item-info {
+    flex-grow: 1;
 }
+
+.purchase-item-name {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.purchase-item-price,
+.purchase-item-quantity,
+.purchase-item-total {
+    font-size: 1rem;
+    color: #777;
+}
+
+.purchase-item-total-amount {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.purchase-history-grand-total {
+    margin-top: 30px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+}
+
 
 /* My account start */
 .account {

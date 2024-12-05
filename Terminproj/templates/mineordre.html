@@ -8,35 +8,34 @@
 </head>
 <body>
     {% include 'navbar.html' %}
-    <div class="container">
+    <div class="purchase-history-container">
         <h1 class="text-center my-4">Purchase History</h1>
 
         {% if purchases %}
-            <div class="row">
+            <div class="purchase-history-table">
                 {% for purchase in purchases %}
-                    <div class="col-md-4 mb-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">Date: {{ purchase['date'] }}</h5>
-                                <ul class="list-group">
-                                    {% for item in purchase['items'] %}
-                                        <li class="list-group-item">
-                                            <div class="d-flex">
-                                                <div class="mr-3">
-                                                    <img src="{{ item['image'] }}" alt="{{ item['name'] }}" class="img-fluid" style="width: 100px; height: 100px;">
-                                                </div>
-                                                <div>
-                                                    <h6 class="card-subtitle mb-2">{{ item['name'] }}</h6>
-                                                    <p class="card-text">Price: kr {{ item['price'] }}</p>
-                                                    <p class="card-text">Quantity: {{ item['quantity'] }}</p>
-                                                    <p class="card-text"><strong>Total: kr {{ item['price']|float * item['quantity']|float }}</strong></p>
-                                                </div>
-                                              
-                                    
+                    <div class="purchase-item">
+                        <div class="purchase-item-body">
+                            <h5 class="purchase-item-date">Date: {{ purchase['date'] }}</h5>
+                            <ul class="purchase-item-list">
+                                {% for item in purchase['items'] %}
+                                    <li class="purchase-item-list-item">
+                                        <div class="purchase-item-details">
+                                            <div class="purchase-item-image">
+                                                <img src="{{ item['image'] }}" alt="{{ item['name'] }}" class="img-fluid" style="width: 100px; height: 100px;">
                                             </div>
-                                        </li>
-                                    {% endfor %}
-                                </ul>
+                                            <div class="purchase-item-info">
+                                                <h6 class="purchase-item-name">{{ item['name'] }}</h6>
+                                                <p class="purchase-item-price">Price: kr {{ item['price'] }}</p>
+                                                <p class="purchase-item-quantity">Quantity: {{ item['quantity'] }}</p>
+                                                <p class="purchase-item-total"><strong>Total: kr {{ (item['price']|float * item['quantity'])|round(2) }}</strong></p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                            <div class="purchase-item-total-amount text-right mt-3">
+                                <h5><strong>Purchase Total: kr {{ purchase['total'] }}</strong></h5>
                             </div>
                         </div>
                     </div>
@@ -48,8 +47,10 @@
     </div>
 </body>
 
-<footer>
-    Shokjøp © <a target="_blank" href="https://github.com/freyzsaycon/Shokjop.git"><img src="/static/img/githublogo.png" alt="github logo"></a>
+<footer class="footer">
+    Shokjøp © 
+    <a target="_blank" href="https://github.com/freyzsaycon/Shokjop.git">
+        <img src="/static/img/githublogo.png" alt="github logo">
+    </a>
 </footer>
-
 </html>

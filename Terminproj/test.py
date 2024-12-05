@@ -133,11 +133,14 @@ def purchase_history():
     initialize_cart()  
     purchases = session.get('purchase_history', [])
     
-    limit = 5
-    limited_purchases = purchases[-limit:]  
+    # Calculate the grand total across all purchases
+    grand_total = 0
+    for purchase in purchases:
+        purchase_total = sum(float(item['price']) * item['quantity'] for item in purchase['items'])
+        purchase['total'] = round(purchase_total, 2)  # Add total for each purchase
+        grand_total += purchase_total
     
-    return render_template('mineordre.html', purchases=limited_purchases)
-
+    return render_template('mineordre.html', purchases=purchases, grand_total=round(grand_total, 2))
 
 
 # MORE INFORMATION BUTTON LINKS
