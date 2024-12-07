@@ -1,8 +1,9 @@
 import mysql.connector
 from mysql.connector import Error
 
+
 def connect_to_database():
-    """Connect to the cartdata database and return the connection object."""
+    # """Connect to the cartdata database and return the connection object."""
     try:
         connection = mysql.connector.connect(
             host="localhost", 
@@ -19,7 +20,7 @@ def connect_to_database():
         return None
 
 def create_tables(connection):
-    """Create the purchases and purchase_items tables in the cartdata database."""
+    # """Create the purchases and purchase_items tables in the cartdata database."""
     try:
         cursor = connection.cursor()
         

@@ -2,7 +2,7 @@ import uuid
 from flask import Flask, render_template, request, redirect, url_for, session, get_flashed_messages,flash
 from database import connect_to_database
 from datetime import datetime
-import sqlite3
+
 
 app = Flask(__name__)
 app.secret_key = 'Frendon&Angelito'
@@ -42,7 +42,7 @@ def add_to_cart():
         session['cart'] = []
     
     
-    # Retrieve product data from the form
+    # get  product data from the form
     product_id = request.form.get('product_id')
     product_name = request.form.get('product_name')
     product_price = request.form.get('product_price')
@@ -115,6 +115,33 @@ def checkout():
             'date': datetime.now().strftime("%Y-%m-%d"),
             'items': session['cart'].copy() 
         }
+        connection = connect_to_database()
+        if connection is None:
+            return "❌ Failed to connect to the database.", 500
+        
+        total_price = sum(float(item['price']) * item['quantity'] for item in session['cart'])
+
+        cursor = connection.cursor()
+        
+        # Insert into 'purchases' table
+        cursor.execute("""
+            INSERT INTO purchases (cart_id, total_price) VALUES (%s, %s)
+        """, (str(uuid.uuid4()), total_price))  
+        connection.commit()
+        
+        purchase_id = cursor.lastrowid  # Get last inserted purchase id
+        
+        # Insert purchase items
+        for item in session['cart']:
+            product_id = int(item['id'])
+            cursor.execute("""
+                INSERT INTO purchase_items (purchase_id, product_id, product_name, product_price, quantity, image) 
+                VALUES (%s, %s, %s, %s, %s, %s)
+            """, (purchase_id, product_id, item['name'], item['price'], item['quantity'], item['image']))
+        
+        connection.commit()
+        connection.close()
+        
         
         # Append to purchase history in session
         session['purchase_history'].append(purchase_entry)
@@ -137,7 +164,19 @@ def purchase_history():
     if connection is None:
         return "❌ Failed to connect to the database.", 500
     
-    
+    # to get all the rows in Purchases database
+    cursor = connection.cursor()
+    cursor.execute("SELECT * FROM purchases")
+    db_purchases = cursor.fetchall()
+
+    # To get all the items for what the user purchased
+    for purchase in db_purchases:
+        cursor.execute("""
+            SELECT * FROM purchase_items WHERE purchase_id = ?
+        """, (purchase['id'],))
+        purchase['items'] = cursor.fetchall()
+
+
     # Calculate the grand total to all purchases
     grand_total = 0
     for purchase in purchases:
@@ -145,7 +184,9 @@ def purchase_history():
         purchase['total'] = round(purchase_total, 2)  
         grand_total += purchase_total
     
-    return render_template('mineordre.html', purchases=purchases, grand_total=round(grand_total, 2))
+    connection.close()
+    
+    return render_template('mineordre.html', purchases=db_purchases, grand_total=round(grand_total, 2))
 
 
 # MORE INFORMATION BUTTON LINKS
