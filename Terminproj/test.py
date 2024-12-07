@@ -1,7 +1,8 @@
 import uuid  
 from flask import Flask, render_template, request, redirect, url_for, session, get_flashed_messages,flash
-# from database import mydb
+from database import connect_to_database
 from datetime import datetime
+import sqlite3
 
 app = Flask(__name__)
 app.secret_key = 'Frendon&Angelito'
@@ -9,7 +10,6 @@ app.secret_key = 'Frendon&Angelito'
 # Home
 
 @app.route('/')
-
 def Home():
     return render_template('index.html')
 
@@ -34,11 +34,10 @@ def initialize_cart():
     if 'purchase_history' not in session:
         session['purchase_history'] = []  
 
-
 # Add product to the cart
 @app.route('/add_to_cart', methods=['POST'])
 def add_to_cart():
-    # Initialize the cart if not already initialized
+    # Initialize the cart 
     if 'cart' not in session:
         session['cart'] = []
     
@@ -130,14 +129,20 @@ def checkout():
 
 @app.route('/purchase_history')
 def purchase_history():
+    
     initialize_cart()  
     purchases = session.get('purchase_history', [])
+
+    connection = connect_to_database()
+    if connection is None:
+        return "❌ Failed to connect to the database.", 500
     
-    # Calculate the grand total across all purchases
+    
+    # Calculate the grand total to all purchases
     grand_total = 0
     for purchase in purchases:
         purchase_total = sum(float(item['price']) * item['quantity'] for item in purchase['items'])
-        purchase['total'] = round(purchase_total, 2)  # Add total for each purchase
+        purchase['total'] = round(purchase_total, 2)  
         grand_total += purchase_total
     
     return render_template('mineordre.html', purchases=purchases, grand_total=round(grand_total, 2))
