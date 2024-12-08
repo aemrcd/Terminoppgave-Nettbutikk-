@@ -156,37 +156,77 @@ def checkout():
 
 @app.route('/purchase_history')
 def purchase_history():
-    
+    # Ensure session has purchase history
     initialize_cart()  
-    purchases = session.get('purchase_history', [])
+    session_purchases = session.get('purchase_history', [])  # Session-based purchase history
 
+    # Connect to the database
     connection = connect_to_database()
     if connection is None:
         return "❌ Failed to connect to the database.", 500
     
-    # to get all the rows in Purchases database
     cursor = connection.cursor()
+    
+    # Retrieve all purchases from the database
     cursor.execute("SELECT * FROM purchases")
     db_purchases = cursor.fetchall()
-
-    # To get all the items for what the user purchased
+    
+    # Create a list to hold the updated purchases as dictionaries
+    updated_purchases = []
+    
+    # Get items related to each purchase from the database
     for purchase in db_purchases:
+        purchase_id = purchase[0]  # Assuming 'id' is the first column
+        
+        # Fetch the items for the current purchase
         cursor.execute("""
-            SELECT * FROM purchase_items WHERE purchase_id = ?
-        """, (purchase['id'],))
-        purchase['items'] = cursor.fetchall()
+            SELECT * FROM purchase_items WHERE purchase_id = %s
+        """, (purchase_id,))
+        purchase_items = cursor.fetchall()
 
+        # Create a new dictionary for each purchase
+        purchase_dict = {
+            'id': purchase[0],  # Assuming 'id' is the first column
+            'date': purchase[2],  # Assuming 'purchase_date' is the 3rd column (timestamp)
+            'total_price': purchase[3],  # The total price of the purchase
+            'items': []  # Will be populated below
+        }
+        
+        # Add the items to the purchase_dict
+        for item in purchase_items:
+            try:
+                price = float(item[4]) if item[4] else 0.0  # product_price is the 5th column
+                quantity = item[5]  # quantity is the 6th column
+                product_name = item[3]  # product_name is the 4th column
+                image = item[6]  # image is the 7th column
 
-    # Calculate the grand total to all purchases
+                purchase_dict['items'].append({
+                    'name': product_name,
+                    'price': price,
+                    'quantity': quantity,
+                    'image': image
+                })
+            except ValueError as e:
+                print(f"Error processing item: {item} - {e}")
+                continue
+        
+        updated_purchases.append(purchase_dict)
+    
+    # Calculate the grand total of all purchases
     grand_total = 0
-    for purchase in purchases:
-        purchase_total = sum(float(item['price']) * item['quantity'] for item in purchase['items'])
-        purchase['total'] = round(purchase_total, 2)  
-        grand_total += purchase_total
+    for purchase in updated_purchases:
+        item_total = sum(float(item['price']) * item['quantity'] for item in purchase['items'])
+        purchase['total'] = round(item_total, 2)  # Store total for this purchase
+        grand_total += item_total
     
     connection.close()
     
-    return render_template('mineordre.html', purchases=db_purchases, grand_total=round(grand_total, 2))
+    # Render the template with updated purchase history data
+    return render_template('mineordre.html', purchases=updated_purchases, grand_total=round(grand_total, 2))
+
+
+
+
 
 
 # MORE INFORMATION BUTTON LINKS
