@@ -1,5 +1,5 @@
 import uuid  
-from flask import Flask, render_template, request, redirect, url_for, session, get_flashed_messages,flash
+from flask import Flask, render_template, request, redirect, url_for, session ,flash
 from database import connect_to_database
 from datetime import datetime
 
@@ -187,7 +187,7 @@ def purchase_history():
         # Create a new dictionary for each purchase
         purchase_dict = {
             'id': purchase[0],  # Assuming 'id' is the first column
-            'date': purchase[2],  # Assuming 'purchase_date' is the 3rd column (timestamp)
+            'date': datetime.strftime(purchase[2], '%Y-%m-%d'),  # Assuming 'purchase_date' is the 3rd column (timestamp)
             'total_price': purchase[3],  # The total price of the purchase
             'items': []  # Will be populated below
         }

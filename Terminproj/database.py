@@ -5,12 +5,18 @@ from mysql.connector import Error
 def connect_to_database():
     # """Connect to the cartdata database and return the connection object."""
     try:
+        # connection = mysql.connector.connect(
+        #     host="localhost", 
+        #     user="root",
+        #     password="",
+        #     database="cartdata",
+        #     port=3306
         connection = mysql.connector.connect(
-            host="localhost", 
-            user="root",
-            password="",
-            database="cartdata",
-            port=3306
+        host="10.2.2.29", 
+        user="Aerol",
+        password="Anmea050*",
+        database="Cartdata",
+        port=3306
         )
         if connection.is_connected():
             print("✅ Connection successful!")
