@@ -2,6 +2,7 @@ import mysql.connector
 from mysql.connector import Error
 
 
+
 def connect_to_database():
     # """Connect to the cartdata database and return the connection object."""
     try:
