@@ -21,9 +21,16 @@
 - Click on the link [https://code.visualstudio.com/download]
 - Click on the type of operating system you have.
   
-## 2. Installing  Python & Libraries <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" width="30px">
+## 2. Installing  Python <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" width="30px">
 
 - Click on the link [https://www.python.org/downloads/]
+
+- Open the download file 
+    - Click Customize installation
+    - Make sure to select all boxes especially `pip` to install every types of libraries using the `pip` function
+    - Click Next and select `"Add Python to environent Variables"` & `"Install Python 3.13 for all users"`
+    
+    - **INSTALL**
 
 ## 3. Cloning the Repository
 
