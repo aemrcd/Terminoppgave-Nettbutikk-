@@ -1,40 +1,44 @@
 # Shokjøp
 
-## **📚 Table of Contents**
+# **📚 Table of Contents**
   - [✨ Introduction](#introduction)
   - [🛠️ Requirements](#%EF%B8%8F-requirements)
 
     ## [Shokjøp MVP](#shokjøp-features)
 
-  - [Cart](#1basic-use-of-container-queries)
-  - [Purchase History](#2basic-use-of-grid)
+  - [Cart](#1.-Cart)
+  - [Purchase History](#2.-Purchase-History)
      
 
-## **✨Introduction**  
+# **✨Introduction**  
 
 ###  Shoskjøp aims is for every gamers who want to fulfill they're gaming experience using better gaming accessories.
 
 
-
-
-###  🛠️ Requirements 
+#  🛠️ Requirements 
 
 ## **1. Download and install Visual Studio Code <img src=https://upload.wikimedia.org/wikipedia/commons/9/9a/Visual_Studio_Code_1.35_icon.svg width="25px">**
 - Click on the link [https://code.visualstudio.com/download]
 - Click on the type of operating system you have.
   
-## 2. Installing  Python <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" width="30px">
+## 2. Installing  Python & Libraries <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" width="30px">
 
 - Click on the link [https://www.python.org/downloads/]
 
-### Other Method
+### Make sure to download Python before doing this method
 - Press `Windows Key + R` to open the "Run" menu.
    - Type `cmd` and press **Enter**. This will open the Command Prompt.
    - install Python by typing: 
    ```bash 
     pip install python 
    ``` 
-## **3. Installing MariaDB to PI 
+- Installing libraries to python by typing the following commands
+    ```bash 
+    pip install -r requirements.txt
+
+   ``` 
+
+## 3. Installing MariaDB to PI 
 ### Make sure you install Ubuntu on your `PI` 
 
 - Press `Windows Key` to open the "Search" menu.
@@ -44,7 +48,7 @@
     sudo apt install mariadb-server
 ```
 ```bash
-    sudo mysql_secure_installation
+    sudo mariadb_secure_installation
 ```
 ## 4. Creating and Managing Databases
 - 1. Log in to MariaDB as root:
@@ -66,6 +70,35 @@
 ```bash
     EXIT;
 ```
+### Managing Tables in MariaDB:
+
+1. Showing The Database:
+- This statement works to show all of your database.
+```bash
+   SHOW DATABASES;
+```
+2. SELECTING The Database:
+- This statement works if you have multiple database.
+```bash
+   USE "yourdatabase";
+```
+3. Viewing tables in your database
+- To see the data inside a table, use the `SELECT` query. Replace `"yourtable"` with the name of the your table  to view.
+
+```bash
+   SELECT * FROM "yourdatabase";
+```
+4. Deleting a Row from a Table
+
+- If you want to delete a specific row in a table, use the   `DELETE` statement with a `WHERE` and  Replace `"yourtable"` with the your table name and `"PLACE_YOUR_ID"` with the ID or condition to delete a spesific row.
+
+```bash
+    SELECT * FROM  "yourdatabase" WHERE Id IN = "PLACE_YOUR_ID";
+```
+
+
+
+
 ## 5. Clone the Repository
 
 Follow these simple steps to clone the repository to your local machine:
@@ -82,44 +115,24 @@ Follow these simple steps to clone the repository to your local machine:
    ```bash
    git clone https://github.com/aemrcd/Terminoppgave-Nettbutikk-
 
-## **Shokjøp Features**
+# **Shokjøp Features**
+
+<details>
+<summary style="font-weight: bold; font-size: 15px;">Click to show the Features </summary>
 
 ## **1. Cart**  
 
+<img src="Terminproj/static/img/Cart.gif">
+
+- *This is a cart-based website that calculates the total items purchased and stores the purchase details in the database after the user completes their order.*
 
 
 ## **2. Purchase History**  
 
-<img src="./static/img/Gridexample.png">
+<img src="Terminproj/static/img/Purchase_history.gif">
 
 
-
-- *if you are having trouble understanding the function there is a comment to fully understand the code it self*
-
-
-## **3.Use of `align-content`**  
-
-<img src="./static/img/align-content_Funtions.gif">
-
-
-- For better explanation open `align-content`  in the *template & static folder* or create your own HTML file.* 
-
-
-
-
-
-
-
-
-
-
-
-
-
-<details style="background-color:red ;">
-<summary>shoutout</summary>
-
-### soutout to Jasan for the help!
+- *This website displays the purchase history for users and administrators, with a dedicated database to store all past transactions.*
 
 
 </details>
