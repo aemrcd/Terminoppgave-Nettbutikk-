@@ -126,7 +126,7 @@ Follow these simple steps to clone the repository to your local machine:
 
 ## **2. Purchase History**  
 
-<img src="Terminproj/static/img/purchase_history.gif">
+<img src="Terminproj/static/img/Purchase_history.gif">
 
 
 - *This website displays the purchase history for users and administrators, with a dedicated database to store all past transactions.*
