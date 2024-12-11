@@ -4,10 +4,10 @@
   - [✨ Introduction](#introduction)
   - [🛠️ Requirements](#%EF%B8%8F-requirements)
 
-    ## [Shokjøp MVP](#shokjøp-features)
+    ## [Shokjøp Features](#shokjøp-features)
 
-  - [Cart](#1.-Cart)
-  - [Purchase History](#2.-Purchase-History)
+  - [Cart](#1-cart)
+  - [Purchase History](#2-purchase-history)
      
 
 # **✨Introduction**  
@@ -24,19 +24,6 @@
 ## 2. Installing  Python & Libraries <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" width="30px">
 
 - Click on the link [https://www.python.org/downloads/]
-
-### Make sure to download Python before doing this method
-- Press `Windows Key + R` to open the "Run" menu.
-   - Type `cmd` and press **Enter**. This will open the Command Prompt.
-   - install Python by typing: 
-   ```bash 
-    pip install python 
-   ``` 
-- Installing libraries to python by typing the following commands
-    ```bash 
-    pip install -r requirements.txt
-
-   ``` 
 
 ## 3. Installing MariaDB to PI 
 ### Make sure you install Ubuntu on your `PI` 
@@ -96,9 +83,6 @@
     SELECT * FROM  "yourdatabase" WHERE Id IN = "PLACE_YOUR_ID";
 ```
 
-
-
-
 ## 5. Clone the Repository
 
 Follow these simple steps to clone the repository to your local machine:
@@ -114,7 +98,12 @@ Follow these simple steps to clone the repository to your local machine:
    - In the Command Prompt, use the `git clone` command to clone the repository into the folder you created:
    ```bash
    git clone https://github.com/aemrcd/Terminoppgave-Nettbutikk-
+   
+- Installing libraries to python by typing the following commands. This will download all the libraries to use the website.
 
+    ```bash 
+    pip install -r requirements.txt
+    ``` 
 # **Shokjøp Features**
 
 <details>
