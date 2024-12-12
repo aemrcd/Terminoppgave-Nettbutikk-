@@ -7,7 +7,7 @@
     ## [Shokjøp Features](#shokjøp-features)
 
   - [Cart](#1-cart)
-  - [Purchase History](#2-purchase-history)
+  - [Purchase History](#2-Purchase-history)
      
 
 # **✨Introduction**  
