@@ -158,7 +158,6 @@ def checkout():
 def purchase_history():
     # Ensure session has purchase history
     initialize_cart()  
-    session_purchases = session.get('purchase_history', [])  # Session-based purchase history
 
     # Connect to the database
     connection = connect_to_database()
